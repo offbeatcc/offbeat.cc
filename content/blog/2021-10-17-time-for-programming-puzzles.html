@@ -1,0 +1,260 @@
+<!-- title: It's Time for Programming Puzzles -->
+<h2 id="introduction">Introduction</h2>
+<p>
+  In the beginning of this month, we concluded our previous reading
+  sessions on analytic number theory. It took about 79 hours spread
+  across 120 meetings and 7 months to complete reading a 300-page
+  textbook on analytic number theory. After a short break of two
+  weeks, we are now going to resume our club activities. We have
+  chosen
+  the <a href="https://github.com/offbeatcc/cses/blob/main/problemset.md#cses-problem-set">CSES
+  Problem Set</a> and the
+  associated <a href="https://cses.fi/book/book.pdf">book</a> written
+  by Antti Laaksonen for this new series of reading sessions.
+</p>
+
+<h2 id="puzzles">Puzzles, Programming, and Mathematics</h2>
+<p>
+  I have been fond of puzzles (mathematical, programming, or
+  otherwise) since my childhood days. Despite being a considerable
+  time sink and having arguably very little utility in life, the
+  activity of solving puzzles is something I find very enjoyable. I
+  enjoy looking at a problem from multiple perspectives and gaining a
+  deeper appreciation of the underlying patterns that lead to
+  interesting mathematical properties related to the problem.
+</p>
+<p>
+  As a result of my personal liking for puzzles, I am eagerly looking
+  forward to hosting these reading sessions. The problems from the
+  CSES problem set we will be looking at are also known as competitive
+  programming problems. They are called so because often problems of
+  this nature are used in programming contests. The problems are
+  usually contrived and solving them generally require skilled
+  application of mathematics, logic, data structures, and algorithms.
+</p>
+<p>
+  To be honest, I do not have a lot of experience in competitive
+  programming. Twelve years ago, a friend insisted that I must try my
+  hand at an upcoming competitive programming contest. He perhaps
+  suggested that after observing my fondness for mathematical puzzles.
+  I took his advice, participated in the CodeChef July 09 contest, and
+  was pleasantly surprised to see that I managed to obtain a
+  <a href="http://web.archive.org/web/20211017050134/https://www.codechef.com/rankings/JULY09?page=2">
+  decent score</a>. Not bad for the first try!
+</p>
+<p>
+  Apart from that brief encounter, I have not done much competitive
+  programming. However, I have always been involved in mathematics as
+  well as algorithms in a non-competitive manner both as hobby as well
+  as part of my professional work. I still remain fond of puzzles. I
+  am hoping that this club activity will help me to sharpen my skills
+  for solving programming puzzles further!
+</p>
+
+<h2 id="problems">Problems</h2>
+<p>
+  In the first couple of weeks we are going to look at and discuss the
+  introductory problems from the CSES problem set. We will then move
+  on to sorting and searching, dynamic programming, graph algorithms,
+  and other themes laid out in the problem set. Often seemingly
+  convoluted problems turn out to have simple and elegant solutions.
+  Let us see a couple of examples of the introductory problems.
+</p>
+
+<p>
+  <em>Note that there are spoilers in the two subsections below. If
+    you want to avoid looking at the spoilers, skip ahead to the
+    section named <a href="#community">Community</a>.</em>
+</p>
+
+<h3 id="number-spiral">Number Spiral</h3>
+<p>
+  Consider the introductory problem
+  named <a href="https://cses.fi/problemset/task/1071">Number
+  Spiral</a> where we need to predict the integer at row \( y \) and
+  column \( x \) in a spiral like this:
+
+  \begin{array}{r r r r r}
+   1 &  2 &  9 & 10 & 25 & \dots \\
+   4 &  3 &  8 & 11 & 24 & \dots \\
+   5 &  6 &  7 & 12 & 23 & \dots \\
+  16 & 15 & 14 & 13 & 22 & \dots \\
+  17 & 18 & 19 & 20 & 21 & \dots \\
+  \vdots & \vdots & \vdots & \vdots & \vdots
+  \end{array}
+
+  If we represent the integer at row \( y \) and column \( x \) as \(
+  f(y, x) \), where both \( y \) and \( x \) are \( 1 \)-based
+  indices, it turns out that \( f(y, x) \) can be expressed as
+
+  \[
+  f(y, x) = 1 + k(k - 1) + (-1)^k (y - x)
+  \]
+
+  where \( k = \max(y, x) \). Here is a quick illustration of this
+  formula. Say, we want to find the integer at row \( 3 \) and column
+  \( 5 \). We first set \( k = \max(3, 5) = 5 \). Then we compute \(
+  f(3, 5) \) as
+
+  \[
+  f(3, 5) = 1 + 5(5 - 1) + (-1)^5 (3 - 5) = 23.
+  \]
+
+  Indeed the integer at the third row and fifth column is \( 23 \). It
+  takes only a couple of lines to implement this solution as code:
+</p>
+<pre>
+<code>long long f(long long y, long long x)
+{
+    long long k = std::max(x, y);
+    return (1 + k * (k - 1)) + (k % 2 == 0 ? 1 : -1) * (y - x);
+}</code>
+</pre>
+<p>
+  It is this kind of interesting results that make the activity of
+  solving programming puzzles quite fun! How a clumsy looking problem
+  turns into a neat formula like this is something we are going to
+  discuss in our club meetings. In case you are curious, take a look
+  at the relevant <a href="../cses/boards/#problem-notes">meeting
+  boards</a> for this club.
+</p>
+
+<h3 id="coin-piles">Coin Piles</h3>
+<p>
+  Here is another interesting introductory problem
+  named <a href="https://cses.fi/problemset/task/1754/">Coin
+  Piles</a>. It involves two coin piles containing \( a \) and \( b \)
+  number of coins. On each move, we can remove one coin from one pile
+  and two coins from the other pile. Given \( a \) and \( b \), we
+  need to find out if there is a way to empty both the files after a
+  finite number of moves.
+</p>
+<p>
+  Since we remove exactly \( 3 \) coins in each move, it is easy to
+  see that a necessary condition for emptying both piles successfully
+  is that \( a + b \) must be a multiple of \( 3 \). Further, assuming
+  \( a \le b \), it is also necessary that \( a \) is at least half of
+  \( b \), i.e., the inequality \( a \ge b/2 \) must be satisfied. If
+  \( a < b/2 \), we can never make both piles empty. Even if we were
+  to remove only \( 1 \) coin from the first pile in every move, after
+  \( a \) moves, the second pile would still contain \( b - 2a \)
+  coins left but the first file would be empty thus preventing us from
+  making any subsequent move.
+</p>
+<p>
+  In the previous paragraph, we obtained two necessary conditions with
+  a couple of quick observations. If either of the necessary
+  conditions is violated, then there is no way to make both piles
+  empty. Are the necessary conditions also sufficient? If \( a + b \)
+  is a multiple of \( 3 \) and \( a \ge b/2 \), must we certainly be
+  able to make both piles empty after a finite number of moves? Yes,
+  it turns out that the necessary conditions are also sufficient. It
+  takes a tiny bit of more work to show that it is really so. As a
+  result, assuming that we have already ensured \( a \le b \), the
+  essence of the solution can be expressed as a single line of code:
+</p>
+<pre>
+<code>return ((a + b) % 3 == 0 && 2 * a >= b) ? "YES" : "NO";</code>
+</pre>
+<p>
+  Again, we will discuss these things in our meetings. But if you are
+  curious, you can take a look at the
+  relevant <a href="../cses/boards/#problem-notes">meeting boards</a>.
+</p>
+
+<h2 id="community">Community</h2>
+<p>
+  This topic of CSES problem set was chosen by popular demand from the
+  current members of the club. Most existing members of this club have
+  come from ##math and #algorithms channel of Libera IRC. Many members
+  of this club have also come from the Hacker News community. I know
+  from prior meetings on analytic number theory that some members of
+  our club have a strong background in mathematics as well as
+  competitive programming. Some members are far more skilled at these
+  areas than I am. A few members have also made significant progress
+  with the problem set already.
+</p>
+<p>
+  I am hoping that we can learn a lot from the collective experience
+  and expertise of various club members who join our meetings. That
+  has been my experience in the prior book club meetings on analytic
+  number theory too. I learnt a lot more from the insightful comments
+  from other very bright members than I would have learnt if I were
+  reading the book alone. It was a very rewarding experience and I
+  expect the learning experience in the upcoming meetings to be
+  similar too.
+</p>
+
+<h2 id="meeting-format">Meeting Format</h2>
+<p>
+  Our meeting style so far has been to go through every page of the
+  book. Additionally, for the upcoming series of meetings, we also
+  plan to go through the programming problems in the CSES problem set.
+  We plan to spend about 20% time on reading the book and 80% time on
+  discussing the problems.
+</p>
+<p>
+  Unlike other book clubs, we do not expect the participants to read
+  the book in advance and we do not limit our discussion to only an
+  overall summary of the sections and chapters from the book. Instead
+  we go through the entire book together in our meetings, page by
+  page. The most serious participants do read the book in advance. As
+  a meeting host, I too read the book in advance. But we read the book
+  together once again line by line during the meetings. We pause at
+  the end of every section to give everyone a chance to add their
+  comments and insights about the section.
+</p>
+<p>
+  In a nutshell, the meeting host and the serious participants do a
+  second pass over the chapters of the book during the meetings. The
+  first pass is typically done privately in advance. However, many
+  participants do their first pass over the material only in our
+  meetings. We consider that fine.
+</p>
+<p>
+  For the subject of analytic number theory in our previous meetings,
+  where the textbook was very dense, a two-pass detailed reading like
+  this was very helpful in thoroughly understanding the material. I do
+  not know yet if the same approach would work well for an easier
+  material like the CSES problem set and the associated book. We will
+  see what works well in our meetings and what does not as we make
+  progress with our meetings. We will then fine tune the meeting
+  format accordingly.
+</p>
+<p>
+  We normally do not record the meetings. However, we are exploring if
+  we can make the meeting recordings available on a temporary basis
+  (say, for a week or two). But do not count on it. Details about this
+  will be shared in our IRC channel mentioned in the next section.
+</p>
+
+<h2 id="join-us">Join Us</h2>
+<p>
+  If solving programming puzzles sounds like fun to you, consider
+  joining us! Visit <a href="../cses/">CSES Problem Solving Club</a>
+  to get the meeting link, schedule, plan, etc. The first meeting is
+  going to be on Tue, 19 Oct 2021 at 17:00 UTC. See
+  the <a href="../cses/boards/">meeting boards</a> being prepared now
+  to get a glimpse of the kind of stuff we will discuss in the
+  upcoming meetings.
+</p>
+<p>
+  These meetings are open to anyone who is willing to join and study
+  the reference book and the problem set with us. Note that silently
+  lurking is considered completely fine in our meetings. In fact, most
+  members of the club join in and stay silent throughout the meetings.
+  Only a few members talk via audio/video or chat. This is considered
+  absolutely normal in our meetings, so please do not hesitate to join
+  our meetings!
+</p>
+<p>
+  Also, consider hanging out with us at our
+  channel <a href="https://web.libera.chat/#offbeat">#offbeat</a> on
+  Libera IRC to be a part of our club activities. Alternatively you
+  can also join our channel via its Matrix bridge
+  at <a href="https://app.element.io/#/room/#offbeat:libera.chat">#offbeat:libera.chat</a>.
+  Both the channel link and the bridge link point to the same channel,
+  so you need to join only one of them, not both. If you are not an
+  active IRC user, prefer joining the Matrix bridge because it is more
+  convenient for someone unfamiliar with IRC. See you there!
+</p>

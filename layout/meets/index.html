@@ -1,0 +1,35 @@
+<h1>Meeting Log</h1>
+<p>
+  The following table is a log of all Offbeat Computation Club
+  meetings.
+  <span class="future-info">
+    All future meetings are written in italic font in darker coloured
+    cells. The schedule and plan for future meetings are tentative and
+    subject to change.
+  </span>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Date</th>
+    <th>Duration</th>
+    <th>Participants</th>
+    <th>Topic</th>
+  </tr>
+  {{ meet-rows }}
+</table>
+<h2 id="summary">Summary of Past Meetings</h2>
+<ul>
+  <li>{{ total-count }} {{ meeting-label }}</li>
+  <li>{{ total-minutes }} minutes ({{ total-hours }} hours)</li>
+  <li>{{ average-minutes }} minutes per meeting on an average</li>
+  <li>{{ average-members }} participants per meeting on an average</li>
+</ul>
+<h2 id="more">Club Meeting Logs</h2>
+<p>
+  The list below has links to meeting logs for specific tracks of
+  activities:
+</p>
+<ul>
+  {{ slug-items }}
+</ul>
