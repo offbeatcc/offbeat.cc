@@ -408,10 +408,6 @@
     (make-post-list posts "_site/blog/rss.xml" feed-xml item-xml params)
     posts))
 
-;;; Club.
-(defun make-club (page-layout &optional params)
-  "Generate club."
-)
 
 ;;; Meeting Logs.
 
