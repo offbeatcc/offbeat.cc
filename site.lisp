@@ -542,9 +542,9 @@
     (make-posts "content/club/*.html" "_site/{{ slug }}/index.html"
                 page-layout params)
     ;; Create blog.
-    (make-blog page-layout params)
+    ;; (make-blog page-layout params)
     ;; Create redirects.
-    (make-redirects page-layout params)
+    ;; (make-redirects page-layout params)
     ;; Generate meeting log.
     (make-meets page-layout params))
   t)

@@ -64,7 +64,7 @@ checks:
 _localize:
 	mkdir -p "$$(dirname "$(OUT)")"
 	sed -e 's|https:.*chtml.js|$(ROOT)js/mathjax/es5/tex-mml-chtml.js|' \
-	    -e 's|<script.*muboard.*></script>|<script>window.muboard = { texmeURL: "$(ROOT)texme/texme.js" }; window.texme = { markdownURL: "$(ROOT)marked/marked.min.js", MathJaxURL: "$(ROOT)js/mathjax/es5/tex-mml-chtml.js"}</script><script src="$(ROOT)js/muboard/muboard.js"></script>|' \
+	    -e 's|<script.*muboard.*></script>|<script>window.muboard = { texmeURL: "$(ROOT)js/texme/texme.js" }; window.texme = { markdownURL: "$(ROOT)js/marked/marked.min.js", MathJaxURL: "$(ROOT)js/mathjax/es5/tex-mml-chtml.js"}</script><script src="$(ROOT)js/muboard/muboard.js"></script>|' \
 	    "$(IN)" > "$(OUT)"
 
 # Introduction to Analytic Number Theory
